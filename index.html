@@ -1,0 +1,873 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ID Generate App</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 950px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+
+            background: linear-gradient(90deg,#00ffff,#00ff88);
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: #cbd5e1;
+        }
+
+        .main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .form-box,
+        .card-box {
+            background: rgba(255,255,255,0.08);
+            padding: 25px;
+            border-radius: 20px;
+        }
+
+        h2 {
+            color: #00ffff;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: white;
+            margin-top: 15px;
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 2px solid transparent;
+            outline: none;
+            border-radius: 10px;
+            background: white;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #00ffff;
+        }
+
+        input.wrong {
+            border-color: red;
+            background: #ffe5e5;
+        }
+
+        input.correct {
+            border-color: #00c853;
+            background: #e8fff0;
+        }
+
+        .error {
+            display: none;
+            color: #ff4d4d;
+            font-size: 13px;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        .success {
+            display: none;
+            color: #00ff88;
+            font-size: 13px;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 25px;
+            border: none;
+            border-radius: 12px;
+
+            background: linear-gradient(90deg,#00c6ff,#00ff88);
+
+            color: #06141a;
+            font-size: 17px;
+            font-weight: bold;
+
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,255,200,0.3);
+        }
+
+        /* ID CARD */
+
+        .id-card {
+
+            background: linear-gradient(135deg,#ffffff,#dffcff);
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            color: #102a43;
+
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+
+            display: none;
+        }
+
+        .id-header {
+
+            text-align: center;
+
+            border-bottom: 2px solid #00a6c7;
+
+            padding-bottom: 15px;
+
+            margin-bottom: 15px;
+        }
+
+        .id-header h3 {
+
+            font-size: 24px;
+
+            color: #007c91;
+        }
+
+        .id-header p {
+
+            margin-top: 5px;
+
+            color: #52616b;
+        }
+
+        .student-info {
+
+            line-height: 2;
+
+            font-size: 16px;
+        }
+
+        .student-info span {
+
+            font-weight: bold;
+
+            color: #007c91;
+        }
+
+        .id-footer {
+
+            margin-top: 15px;
+
+            border-top: 1px solid #aaa;
+
+            padding-top: 12px;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            color: #52616b;
+        }
+
+        .developer {
+
+            display: block;
+
+            margin-top: 6px;
+
+            color: #007c91;
+
+            font-weight: bold;
+        }
+
+        .website-footer {
+
+            text-align: center;
+
+            color: #cbd5e1;
+
+            margin-top: 30px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .website-footer strong {
+
+            color: #00ffff;
+        }
+
+        @media (max-width:750px) {
+
+            .main {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 32px;
+            }
+
+            body {
+                padding: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>🎓 ID GENERATE APP</h1>
+
+        <p>Create your school ID card instantly</p>
+
+    </div>
+
+
+
+    <div class="main">
+
+
+        <!-- FORM -->
+
+        <div class="form-box">
+
+            <h2>📝 Student Information</h2>
+
+
+            <!-- NAME -->
+
+            <label>Full Name</label>
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter your name"
+                oninput="checkName()"
+            >
+
+            <div id="nameError" class="error">
+
+                ❌ Wrong Name! Please enter letters only.
+
+            </div>
+
+            <div id="nameSuccess" class="success">
+
+                ✅ Name looks correct.
+
+            </div>
+
+
+
+            <!-- AGE -->
+
+            <label>Age</label>
+
+            <input
+                type="number"
+                id="age"
+                placeholder="Enter your age"
+                oninput="checkAge()"
+            >
+
+            <div id="ageError" class="error">
+
+                ❌ Age must be between 5 and 100.
+
+            </div>
+
+
+
+            <!-- SCHOOL ID -->
+
+            <label>School ID</label>
+
+            <input
+                type="number"
+                id="schoolId"
+                placeholder="Enter your school ID"
+            >
+
+
+
+            <!-- CLASS -->
+
+            <label>Class</label>
+
+            <input
+                type="number"
+                id="className"
+                placeholder="Example: 7"
+                oninput="checkClass()"
+            >
+
+            <div id="classError" class="error">
+
+                ❌ Class must be between 1 and 12.
+
+            </div>
+
+
+
+            <!-- BLOOD GROUP -->
+
+            <label>Blood Group</label>
+
+            <input
+                type="text"
+                id="blood"
+                placeholder="Example: O+"
+                oninput="checkBlood()"
+            >
+
+            <div id="bloodError" class="error">
+
+                ❌ Invalid blood group.
+
+            </div>
+
+
+
+            <!-- SECTION -->
+
+            <label>Section</label>
+
+            <input
+                type="text"
+                id="section"
+                placeholder="Example: Titas"
+            >
+
+
+
+            <!-- YEAR -->
+
+            <label>Current Year</label>
+
+            <input
+                type="number"
+                id="year"
+                placeholder="Example: 2026"
+            >
+
+
+
+            <!-- GENERATE -->
+
+            <button onclick="generateID()">
+
+                🚀 Generate ID Card
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ID CARD -->
+
+        <div class="card-box">
+
+            <h2>🪪 Your ID Card</h2>
+
+
+            <div class="id-card" id="idCard">
+
+
+                <div class="id-header">
+
+                    <h3>🎓 SCHOOL ID CARD</h3>
+
+                    <p>Student Identification Card</p>
+
+                </div>
+
+
+                <div class="student-info">
+
+                    <p>
+                        <span>Name:</span>
+                        <span id="showName"></span>
+                    </p>
+
+                    <p>
+                        <span>Age:</span>
+                        <span id="showAge"></span>
+                    </p>
+
+                    <p>
+                        <span>Class:</span>
+                        <span id="showClass"></span>
+                    </p>
+
+                    <p>
+                        <span>Section:</span>
+                        <span id="showSection"></span>
+                    </p>
+
+                    <p>
+                        <span>School ID:</span>
+                        <span id="showId"></span>
+                    </p>
+
+                    <p>
+                        <span>Blood Group:</span>
+                        <span id="showBlood"></span>
+                    </p>
+
+                    <p>
+                        <span>Year:</span>
+                        <span id="showYear"></span>
+                    </p>
+
+                </div>
+
+
+                <div class="id-footer">
+
+                    Generated by ID Generate App
+
+                    <span class="developer">
+
+                        👨‍💻 Developer: Ahnaf Al Rafi
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <div class="website-footer">
+
+        © 2026 ID Generate App |
+
+        Developed by <strong>Ahnaf Al Rafi</strong>
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+// NAME CHECK
+
+function checkName() {
+
+    const input = document.getElementById("name");
+
+    const error = document.getElementById("nameError");
+
+    const success = document.getElementById("nameSuccess");
+
+    const pattern = /^[A-Za-z ]+$/;
+
+
+    if (input.value.trim() === "") {
+
+        input.classList.remove("wrong", "correct");
+
+        error.style.display = "none";
+
+        success.style.display = "none";
+
+        return;
+
+    }
+
+
+    if (!pattern.test(input.value)) {
+
+        input.classList.add("wrong");
+
+        input.classList.remove("correct");
+
+        error.style.display = "block";
+
+        success.style.display = "none";
+
+    }
+
+    else {
+
+        input.classList.remove("wrong");
+
+        input.classList.add("correct");
+
+        error.style.display = "none";
+
+        success.style.display = "block";
+
+    }
+
+}
+
+
+
+// AGE CHECK
+
+function checkAge() {
+
+    const input = document.getElementById("age");
+
+    const error = document.getElementById("ageError");
+
+
+    if (input.value === "") {
+
+        input.classList.remove("wrong");
+
+        error.style.display = "none";
+
+        return;
+
+    }
+
+
+    const age = Number(input.value);
+
+
+    if (age < 5 || age > 100) {
+
+        input.classList.add("wrong");
+
+        error.style.display = "block";
+
+    }
+
+    else {
+
+        input.classList.remove("wrong");
+
+        error.style.display = "none";
+
+    }
+
+}
+
+
+
+// CLASS CHECK
+
+function checkClass() {
+
+    const input = document.getElementById("className");
+
+    const error = document.getElementById("classError");
+
+
+    if (input.value === "") {
+
+        input.classList.remove("wrong");
+
+        error.style.display = "none";
+
+        return;
+
+    }
+
+
+    const classNumber = Number(input.value);
+
+
+    if (classNumber < 1 || classNumber > 12) {
+
+        input.classList.add("wrong");
+
+        error.style.display = "block";
+
+    }
+
+    else {
+
+        input.classList.remove("wrong");
+
+        error.style.display = "none";
+
+    }
+
+}
+
+
+
+// BLOOD CHECK
+
+function checkBlood() {
+
+    const input = document.getElementById("blood");
+
+    const error = document.getElementById("bloodError");
+
+    const blood = input.value.toUpperCase();
+
+
+    const validBlood = [
+
+        "A+",
+        "A-",
+        "B+",
+        "B-",
+        "AB+",
+        "AB-",
+        "O+",
+        "O-"
+
+    ];
+
+
+    if (input.value === "") {
+
+        input.classList.remove("wrong");
+
+        error.style.display = "none";
+
+        return;
+
+    }
+
+
+    if (!validBlood.includes(blood)) {
+
+        input.classList.add("wrong");
+
+        error.style.display = "block";
+
+    }
+
+    else {
+
+        input.classList.remove("wrong");
+
+        error.style.display = "none";
+
+    }
+
+}
+
+
+
+// GENERATE ID
+
+function generateID() {
+
+    const name =
+        document.getElementById("name").value.trim();
+
+    const age =
+        document.getElementById("age").value.trim();
+
+    const schoolId =
+        document.getElementById("schoolId").value.trim();
+
+    const className =
+        document.getElementById("className").value.trim();
+
+    const blood =
+        document.getElementById("blood").value.trim();
+
+    const section =
+        document.getElementById("section").value.trim();
+
+    const year =
+        document.getElementById("year").value.trim();
+
+
+
+    // EMPTY CHECK
+
+    if (
+        name === "" ||
+        age === "" ||
+        schoolId === "" ||
+        className === "" ||
+        blood === "" ||
+        section === "" ||
+        year === ""
+    ) {
+
+        alert("⚠️ Please fill in all information!");
+
+        return;
+    }
+
+
+
+    // NAME CHECK
+
+    const namePattern = /^[A-Za-z ]+$/;
+
+    if (!namePattern.test(name)) {
+
+        alert("❌ Wrong Name! Please enter letters only.");
+
+        return;
+    }
+
+
+
+    // AGE CHECK
+
+    const ageNumber = Number(age);
+
+    if (ageNumber < 5 || ageNumber > 100) {
+
+        alert("❌ Wrong Age! Age must be between 5 and 100.");
+
+        return;
+    }
+
+
+
+    // CLASS CHECK
+
+    const classNumber = Number(className);
+
+    if (classNumber < 1 || classNumber > 12) {
+
+        alert("❌ Wrong Class! Class must be between 1 and 12.");
+
+        return;
+    }
+
+
+
+    // BLOOD CHECK
+
+    const validBlood = [
+
+        "A+",
+        "A-",
+        "B+",
+        "B-",
+        "AB+",
+        "AB-",
+        "O+",
+        "O-"
+
+    ];
+
+
+    const upperBlood = blood.toUpperCase();
+
+
+    if (!validBlood.includes(upperBlood)) {
+
+        alert("❌ Wrong Blood Group!");
+
+        return;
+    }
+
+
+
+    // PUT DATA INTO CARD
+
+    document.getElementById("showName").textContent =
+        name;
+
+    document.getElementById("showAge").textContent =
+        age;
+
+    document.getElementById("showClass").textContent =
+        className;
+
+    document.getElementById("showSection").textContent =
+        section;
+
+    document.getElementById("showId").textContent =
+        schoolId;
+
+    document.getElementById("showBlood").textContent =
+        upperBlood;
+
+    document.getElementById("showYear").textContent =
+        year;
+
+
+
+    // SHOW CARD
+
+    document.getElementById("idCard").style.display =
+        "block";
+
+}
+
+</script>
+
+
+</body>
+
+</html>
+```
